@@ -1,0 +1,98 @@
+<html ng-app="interactApp">
+  <head>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-cookies.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/angular.chartjs/0.8.4/angular-chart.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
+    <script src="/interact/interact.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/angular.chartjs/0.8.4/angular-chart.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="semantic.min.css">
+    <script src="semantic.min.js"></script>
+  </head>
+  <body>
+    <div ng-controller="graphController">
+      <div class="ui large menu">
+        <div class="header item">
+          <i class="line chart icon"></i>
+          <div class="content">
+            Activity Report
+          </div>
+        </div>
+        <div class="right menu">
+          <div class="item">
+            <a class="ui orange button" ng-show="authToken == undefined" href="/interact/login.html">Login</a>
+            <div class="right floated ui green large label" ng-show="authToken">
+              <i class="user icon"></i> Connected
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui grid container">
+        <div class="thirteen wide column">
+          <canvas id="line" class="chart chart-line" chart-data="data"
+            chart-labels="labels" chart-series="series" chart-options="options" chart-legend="true"
+            ng-show="!error">
+          </canvas>
+          <div class="ui negative message" ng-show="error">
+            <i class="close icon"></i>
+            <div class="header">
+              Oops! An error occurred.
+            </div>
+            <p>{{errorMessage}}</p>
+          </div>
+        </div>
+
+        <div class="three wide column">
+          <h4 class="ui orange header">
+            <i class="user icon"></i>
+            <div class="content">
+              Select contact(s)
+            </div>
+          </h4>
+          <input type="checkbox" ng-model="selectedContact.sebastian" ng-change="updateChart()">
+          <label>Sebastian</label>
+          <br/>
+          <input type="checkbox" ng-model="selectedContact.michael" ng-change="updateChart()">
+          <label>Michael</label>
+          
+          <h4 class="ui orange header">
+            <i class="calendar outline icon"></i>
+            <div class="content">
+              Select period
+            </div>
+          </h4>
+          <input type="radio" ng-model="selectedPeriod" ng-value="periods.oneWeek" ng-change="updateChart()">
+          <label>1 week</label>
+          <br/>
+          <input type="radio" ng-model="selectedPeriod" ng-value="periods.oneMonth" ng-change="updateChart()">
+          <label>1 month</label>
+          <br/>
+          <input type="radio" ng-model="selectedPeriod" ng-value="periods.threeMonths" ng-change="updateChart()">
+          <label>3 months</label>
+          <br/>
+          <input type="radio" ng-model="selectedPeriod" ng-value="periods.oneYear" ng-change="updateChart()">
+          <label>1 year</label>
+
+          <h4 class="ui orange header">
+            <i class="resize horizontal icon"></i>
+            <div class="content">
+              Select interval
+            </div>
+          </h4>
+          <input type="radio" ng-model="selectedInterval" value="daily" ng-change="updateChart()">
+          <label>Daily</label>
+          <br/>
+          <input type="radio" ng-model="selectedInterval" value="weekly" ng-change="updateChart()">
+          <label>Weekly</label>
+          <br/>
+          <input type="radio" ng-model="selectedInterval" value="monthly" ng-change="updateChart()">
+          <label>Monthly</label>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

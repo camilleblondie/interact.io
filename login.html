@@ -1,0 +1,48 @@
+<html ng-app="interactApp">
+  <head>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-cookies.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
+    <script src="/interact/interact.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/angular.chartjs/0.8.4/angular-chart.css"></link>
+    <link rel="stylesheet" type="text/css" href="semantic.min.css">
+    <script src="semantic.min.js"></script>
+  </head>
+  <body>
+    <div class="ui divider"></div>
+    <div class="ui four column centered grid">
+      <div class="column">
+        <h2 class="ui header">
+        <i class="sign in icon"></i>
+        <div class="content">
+          Sign in
+        </div>
+      </h2>
+        <div ng-controller="loginController">
+          <form ng-submit="login()" class="ui form">
+            <div class="field">
+              <label>Email</label>
+              <input type="text" ng-model="email" placeholder="sebastian@interact.io" />
+            </div>
+            <div class="field">
+              <label>Password</label>
+              <input type="password" ng-model="password" />
+            </div>
+            <button class="ui orange button">Login</button>
+          </form>
+          <div class="ui success message" ng-show="authToken">
+            <i class="close icon"></i>
+            <div class="header">
+              You have successfully logged in.
+            </div>
+            <p>Go to the <a href="/interact/report.html">activity report page.</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
